@@ -2,16 +2,128 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// import React, { useState, useRef, useEffect } from 'react';
+
+// const App = () => {
+//   const [blocks, setBlocks] = useState([]);
+
+//   const prevBlocksRef = useRef([]);
+
+//   useEffect(() => {
+//     prevBlocksRef.current = blocks;
+//   });
+
+//   const start = (id, e) => {
+//     const updatedBlocks = prevBlocksRef.current.map((item) => {
+//       if (item.id === id) {
+//         item.offX = e.clientX - item.x;
+//         item.offY = e.clientY - item.y;
+//       }
+//       return item;
+//     });
+
+//     setBlocks(updatedBlocks);
+//   };
+
+//   const limitTop = 1;
+//   const limitBottom = 420;
+//   const limitLeft = 0;
+//   const limitRight = 420;
+
+//   const end = (id, e) => {
+//     const updatedBlocks = prevBlocksRef.current.map((item) => {
+//       if (item.id === id) {
+//         let x = e.clientX - item.offX;
+//         let y = e.clientY - item.offY;
+
+//         // Применяем ограничения для координат блока
+//         if (x < limitLeft) {
+//           x = limitLeft;
+//         } else if (x > limitRight) {
+//           x = limitRight;
+//         }
+
+//         if (y < limitTop) {
+//           y = limitTop;
+//         } else if (y > limitBottom) {
+//           y = limitBottom;
+//         }
+
+//         item.x = x;
+//         item.y = y;
+//       }
+//       return item;
+//     });
+
+//     setBlocks(updatedBlocks);
+//   };
+
+//   const add = () => {
+//     const newBlock = {
+//       offX: 0,
+//       offY: 0,
+//       x: 0,
+//       y: 0,
+//       id: Date.now(),
+//       type: 'Table',
+//     };
+
+//     setBlocks((prev) => [...prev, newBlock]);
+//   };
+
+//   const save = () => {
+//     const jsonData = JSON.stringify(blocks);
+//     const blob = new Blob([jsonData], { type: 'application/json' });
+//     const url = URL.createObjectURL(blob);
+
+//     const downloadLink = document.createElement('a');
+//     downloadLink.href = url;
+//     downloadLink.download = 'Elemnts coordinates';
+//     document.body.appendChild(downloadLink);
+//     downloadLink.click();
+//   };
+
+//   return (
+//     <>
+//       <div
+//         style={{
+//           width: '500px',
+//           height: '500px',
+//           border: '3px solid black',
+//           position: 'relative',
+//         }}
+//       >
+//         {blocks?.map((item, index) => (
+//           <div
+//             className='block'
+//             draggable
+//             onDragEnd={(e) => end(item.id, e)}
+//             onDragStart={(e) => start(item.id, e)}
+//             style={{ top: item?.y, left: item?.x }}
+//             key={item.id}
+//           >
+//             {index}
+//           </div>
+//         ))}
+//         <center>
+//           <button onClick={add}>add</button>
+//           <button onClick={() => save()}>show</button>
+//         </center>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default App;
