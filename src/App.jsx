@@ -13,7 +13,7 @@ const App = () => {
   // Limits
   const TopLimit = 0;
   const RightLimit = 440;
-  const BottomLimit = 410;
+  const BottomLimit = 280;
   const leftLimit = 0;
 
   // Elements
@@ -112,7 +112,7 @@ const App = () => {
 
         if (y < TopLimit) {
           y = TopLimit;
-        } else if (y > BottomLimit) {
+        } else if (y > BottomLimit + 65) {
           y = BottomLimit + 65;
         }
         return {
@@ -156,7 +156,7 @@ const App = () => {
 
         if (y < TopLimit) {
           y = TopLimit;
-        } else if (y > BottomLimit) {
+        } else if (y > BottomLimit + 65) {
           y = BottomLimit + 70;
         }
         return {
